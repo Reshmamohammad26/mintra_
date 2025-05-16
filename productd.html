@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="bg-gray-50 font-sans">
+
+  <!-- Header -->
+  <header class="sticky-nav primary-bg">
+    <div class="header-container flex justify-between items-center px-6 py-4 bg-white shadow-md">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/logo.png" alt="Mintra Logo" class="h-12">
+        </a>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search for products..." class="border px-4 py-2 rounded w-64">
+      </div>
+    </div>
+    <!-- Navigation -->
+    <nav class="bg-[#191970] text-white py-2">
+      <ul class="flex justify-center space-x-6">
+        <li><a href="index.html" class="hover:border-b-2 border-white pb-1">Home</a></li>
+        <li><a href="products.html" class="hover:border-b-2 border-white pb-1">Products</a></li>
+        <li><a href="cart.html" class="hover:border-b-2 border-white pb-1">Cart</a></li>
+        <li><a href="login.html" class="hover:border-b-2 border-white pb-1">Login</a></li>
+        <li><a href="about.html" class="hover:border-b-2 border-white pb-1">About</a></li>
+        <li><a href="contact.html" class="hover:border-b-2 border-white pb-1">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Product Details Section -->
+  <main class="max-w-5xl mx-auto p-6">
+    <div id="productDetails" class="bg-white p-6 rounded-lg shadow-md">
+      <!-- JS will inject product details here -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div>Contact us: info@mintra.com</div>
+    <div>About us | Terms | Privacy</div>
+    <div>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
+    </div>
+    <p>&copy; 2025 Mintra. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const products = [
+      { id: 1, name: "Stylish T-Shirt", brand: "Nike", price: 799, size: "M", rating: 4, image: "images/tshirts.jpeg" },
+      { id: 2, name: "Running Shoes", brand: "Adidas", price: 1299, size: "L", rating: 5, image: "images/shoes.jpg" },
+      { id: 3, name: "Classic Watch", brand: "Puma", price: 2499, size: "M", rating: 3, image: "images/watch.jpeg" },
+      { id: 4, name: "Dress", brand: "Nike", price: 999, size: "S", rating: 4, image: "images/dress.jpeg" },
+      { id: 5, name: "Sneakers", brand: "Adidas", price: 1499, size: "XL", rating: 5, image: "images/sneakers.jpeg" },
+      { id: 6, name: "Sporty Jacket", brand: "Puma", price: 2199, size: "L", rating: 4, image: "images/jacket.jpeg" },
+      { id: 7, name: "Casual Shoes", brand: "Nike", price: 1999, size: "M", rating: 4, image: "images/shoes.jpeg" },
+      { id: 8, name: "Formal Shirt", brand: "Adidas", price: 799, size: "L", rating: 5, image: "images/formal-shirt.webp" }
+    ];
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = parseInt(urlParams.get('id'));
+
+    const product = products.find(p => p.id === productId);
+    const container = document.getElementById("productDetails");
+
+    if (!product) {
+      container.innerHTML = "<p class='text-red-500'>Product not found.</p>";
+    } else {
+      container.innerHTML = `
+        <div class="flex flex-col md:flex-row items-center gap-10">
+          <img src="${product.image}" class="w-[350px] h-[350px] object-cover rounded shadow" alt="${product.name}">
+          <div class="space-y-3">
+            <h2 class="text-4xl font-bold text-gray-800">${product.name}</h2>
+            <p class="text--600 text-lg">Brand: ${product.brand}</p>
+            <p class="text-lg font-semibold">Price: ₹${product.price}</p>
+            <p class="text-gray-700">Size: ${product.size}</p>
+            <button class="mt-4 add-to-cart-btn" onclick="addToCart(${product.id})">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function addToCart(id) {
+      const item = products.find(p => p.id === id);
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(item);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${item.name} added to cart`);
+    }
+  </script>
+
+</body>
+
+</html>

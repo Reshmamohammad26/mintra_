@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mintra | Products</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 font-inter">
+
+  <!-- Header -->
+  <header class="sticky-nav primary-bg">
+    <div class="header-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/logo.png" alt="Mintra Logo" class="logo-img">
+        </a>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search for products..." id="searchInput">
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main content -->
+  <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+    
+    <!-- Filters -->
+    <aside class="md:col-span-1">
+      <h2 class="text-xl font-semibold text-blue-800 mb-4">Filters</h2>
+
+      <div class="mb-4">
+        <label class="block font-medium text-blue-700">Brand</label>
+        <select id="brandFilter" class="w-full mt-1 border border-gray-300 rounded px-2 py-1">
+          <option value="All">All</option>
+          <option value="Nike">Nike</option>
+          <option value="Adidas">Adidas</option>
+          <option value="Puma">Puma</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium text-blue-700">Size</label>
+        <div class="flex flex-wrap gap-2 mt-1">
+          <button data-size="S" class="size-btn border px-2 py-1 rounded">S</button>
+          <button data-size="M" class="size-btn border px-2 py-1 rounded">M</button>
+          <button data-size="L" class="size-btn border px-2 py-1 rounded">L</button>
+          <button data-size="XL" class="size-btn border px-2 py-1 rounded">XL</button>
+        </div>
+      </div>
+
+      <div>
+        <label class="block font-medium text-blue-700">Price</label>
+        <input type="range" id="priceFilter" class="w-full mt-1" min="500" max="5000" step="100" value="5000">
+        <div class="text-sm text-gray-600">Up to ₹<span id="priceValue">5000</span></div>
+      </div>
+    </aside>
+
+    <!-- Products -->
+    <section class="md:col-span-3">
+      <h2 class="text-2xl font-bold text-blue-800 mb-6">All Products</h2>
+      <div id="productList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Products will be inserted here by JS -->
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div>Contact us: info@mintra.com</div>
+    <div>About us | Terms | Privacy</div>
+    <div>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
+    </div>
+    <p>&copy; 2025 Mintra. All rights reserved.</p>
+  </footer>
+</body>
+</html>
+
+  <!-- JavaScript -->
+  <script>
+    const products = [
+      { id: 1, name: "Stylish T-Shirt", brand: "Nike", price: 799, size: "M", rating: 4, image: "images/tshirts.jpeg" },
+      { id: 2, name: "Running Shoes", brand: "Adidas", price: 1299, size: "L", rating: 5, image: "images/shoes.jpg" },
+      { id: 3, name: "Classic Watch", brand: "Puma", price: 2499, size: "M", rating: 3, image: "images/watch.jpeg" },
+      { id: 4, name: "Dress", brand: "Nike", price: 999, size: "S", rating: 4, image: "images/dress.jpeg" },
+      { id: 5, name: "Sneakers", brand: "Adidas", price: 1499, size: "XL", rating: 5, image: "images/sneakers.jpeg" },
+      { id: 6, name: "Sporty Jacket", brand: "Puma", price: 2199, size: "L", rating: 4, image: "images/jacket.jpeg" },
+      { id: 7, name: "Casual Shoes", brand: "Nike", price: 1999, size: "M", rating: 4, image: "images/shoes.jpeg" },
+      { id: 8, name: "Formal Shirt", brand: "Adidas", price: 799, size: "L", rating: 5, image: "images/formal-shirt.webp" }
+    ];
+
+    const productList = document.getElementById("productList");
+    const brandFilter = document.getElementById("brandFilter");
+    const priceFilter = document.getElementById("priceFilter");
+    const priceValue = document.getElementById("priceValue");
+    const searchInput = document.getElementById("searchInput");
+
+    let selectedSize = null;
+
+    document.querySelectorAll('.size-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedSize = btn.getAttribute('data-size');
+        renderProducts();
+      });
+    });
+
+    priceFilter.addEventListener('input', () => {
+      priceValue.textContent = priceFilter.value;
+      renderProducts();
+    });
+
+    brandFilter.addEventListener('change', renderProducts);
+    searchInput.addEventListener('input', renderProducts);
+
+    function renderProducts() {
+      const brand = brandFilter.value;
+      const maxPrice = parseInt(priceFilter.value);
+      const search = searchInput.value.toLowerCase();
+
+      productList.innerHTML = "";
+
+      products
+        .filter(p =>
+          (brand === "All" || p.brand === brand) &&
+          (!selectedSize || p.size === selectedSize) &&
+          p.price <= maxPrice &&
+          p.name.toLowerCase().includes(search)
+        )
+        .forEach(p => {
+          const stars = "★".repeat(p.rating) + "☆".repeat(5 - p.rating);
+
+          const card = document.createElement("div");
+          card.className = "flex flex-col bg-white p-4 shadow rounded hover:shadow-lg transition h-full";
+
+          card.innerHTML = `
+            <a href="productd.html?id=${p.id}">
+              <img src="${p.image}" class="mb-2 w-full h-[200px] object-cover rounded cursor-pointer" alt="${p.name}">
+            </a>
+            <div class="flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-semibold text-lg">${p.name}</h3>
+                <p class="text-purple-600 mt-1">₹${p.price}</p>
+                <div class="text-yellow-400">${stars}</div>
+              </div>
+              <button class="mt-4 add-to-cart-btn">Add to Cart</button>
+            </div>
+          `;
+
+          card.querySelector("button").addEventListener("click", () => addToCart(p));
+          productList.appendChild(card);
+        });
+    }
+
+    function addToCart(product) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${product.name} added to cart`);
+    }
+
+    renderProducts();
+  </script>
+
+</body>
+</html>

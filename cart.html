@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mintra | Cart</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 font-inter">
+
+ <!-- Header -->
+  <header class="sticky-nav primary-bg">
+    <div class="header-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/logo.png" alt="Mintra Logo" class="logo-img">
+        </a>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search for products...">
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Cart Details -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <h2 class="text-3xl font-semibold text-blue-800 mb-6">Your Cart</h2>
+    
+    <div id="cartItems" class="space-y-6">
+      <!-- Cart items will be inserted here by JS -->
+    </div>
+
+    <!-- Checkout Button -->
+    <div class="mt-6 flex justify-between items-center">
+      <p class="text-lg font-semibold text-blue-800" id="totalAmount">Total: ₹0</p>
+      <button class="mt-4 add-to-cart-btn" onclick="goToCheckout()">Checkout</button>
+    </div>
+  </main>
+
+   <!-- Footer -->
+  <footer>
+    <div>Contact us: info@mintra.com</div>
+    <div>About us | Terms | Privacy</div>
+    <div>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
+    </div>
+    <p>&copy; 2025 Mintra. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    const cartContainer = document.getElementById('cartItems');
+    const totalAmountContainer = document.getElementById('totalAmount');
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function renderCart() {
+      cartContainer.innerHTML = '';
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+        totalAmountContainer.textContent = "Total: ₹0";
+        return;
+      }
+
+      let totalAmount = 0;
+      cart.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.className = "flex justify-between items-center bg-white shadow-lg rounded-lg p-4";
+
+        cartItem.innerHTML = `
+          <div class="flex items-center">
+            <img src="${item.image}" class="w-20 h-20 object-cover rounded" alt="${item.name}">
+            <div class="ml-4">
+              <p class="text-lg font-semibold text-blue-800">${item.name}</p>
+              <p class="text-sm text-blue-600">₹${item.price}</p>
+              <p class="text-sm text-blue-600">Size: ${item.size}</p>
+            </div>
+          </div>
+          <button class="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600" onclick="removeFromCart(${item.id})">Remove</button>
+        `;
+        cartContainer.appendChild(cartItem);
+        totalAmount += item.price;
+      });
+
+      totalAmountContainer.textContent = `Total: ₹${totalAmount}`;
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function goToCheckout() {
+      if (cart.length === 0) {
+        alert("Your cart is empty. Add some items before checking out.");
+      } else {
+        window.location.href = "checkout.html";
+      }
+    }
+
+    // Initial render
+    renderCart();
+  </script>
+
+</body>
+</html>

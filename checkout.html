@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mintra | Payment Selection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="sticky-nav primary-bg">
+    <div class="header-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/logo.png" alt="Mintra Logo" class="logo-img">
+        </a>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search for products...">
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Main -->
+  <main>
+    <h2>Select Payment Method</h2>
+    <form action="#" method="POST">
+      <!-- Address Selection -->
+      <div class="form-group">
+        <label for="address">Select Shipping Address</label>
+        <select name="address" id="address">
+          <option value="address1">123 Main St, City, State, Zip</option>
+          <option value="address2">456 Elm St, City, State, Zip</option>
+          <option value="address3">789 Oak St, City, State, Zip</option>
+        </select>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="form-group">
+        <label>Payment Method</label>
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" id="credit-card" name="payment-method" value="credit-card">
+            <label for="credit-card">Credit/Debit Card</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="paypal" name="payment-method" value="paypal">
+            <label for="paypal">PayPal</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="cod" name="payment-method" value="cod">
+            <label for="cod">Cash on Delivery</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Credit Card Section -->
+      <div id="credit-card-section" class="form-group hidden">
+        <div class="form-group">
+          <label for="card-number">Card Number</label>
+          <input type="text" id="card-number" name="card-number" placeholder="Enter card number">
+        </div>
+        <div class="form-group">
+          <label for="expiry-date">Expiry Date</label>
+          <input type="month" id="expiry-date" name="expiry-date">
+        </div>
+        <div class="form-group">
+          <label for="cvv">CVV</label>
+          <input type="text" id="cvv" name="cvv" placeholder="Enter CVV">
+        </div>
+      </div>
+
+      <!-- Confirm Button -->
+      <button type="submit">Confirm Payment</button>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div>Contact us: info@mintra.com</div>
+    <div>About us | Terms | Privacy</div>
+    <div>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
+    </div>
+    <p>&copy; 2025 Mintra. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    const paymentOptions = document.querySelectorAll('input[name="payment-method"]');
+    const cardSection = document.getElementById('credit-card-section');
+
+    paymentOptions.forEach(option => {
+      option.addEventListener('change', () => {
+        if (option.value === 'credit-card' && option.checked) {
+          cardSection.classList.remove('hidden');
+        } else {
+          cardSection.classList.add('hidden');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

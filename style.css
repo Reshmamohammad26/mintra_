@@ -1,0 +1,602 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Header Layout */
+.sticky-nav {
+  background-color: #1F3A58; /* Indigo background for header */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  flex-wrap: wrap;
+  background-color: #1F3A58; /* Indigo */
+}
+
+.logo-img {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+}
+
+.search-box {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 20px;
+}
+
+.search-box input {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 280px;
+}
+
+/* Navigation */
+nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  gap: 20px;
+  padding: 10px 0;
+  flex-wrap: wrap;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #FFFFFF; /* White text for contrast in header */
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #d01547; /* Tomato color on hover */
+}
+
+/* Banner */
+.section {
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color:  #2A4D7B; /* Lime Green for section title */
+}
+.banner-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+@media (min-width: 1024px) {
+  .banner-img {
+    height: 400px;
+  }
+}
+
+
+/* Category Grid */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+}
+
+.category-card {
+  background-color: #1F3A58; /* Tomato color for category cards */
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+  color: #fff; /* White text for contrast */
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, border 0.3s;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: #3025ca; /* Lime Green for hover border */
+}
+
+.product-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-title {
+  font-size: 16px;
+  margin: 10px 0 5px;
+  font-weight: 600;
+  color: #2C3E50; /* Dark Slate for product title */
+}
+
+.product-price {
+  color: #63166e; /* Lime Green for price */
+  font-size: 14px;
+}
+
+/* Footer */
+footer {
+  background-color: #1F3A58; /* Alice Blue for footer */
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  color: #e3e7ea; /* Dark Slate */
+}
+
+footer a {
+  margin: 0 10px;
+  color: #ab93bd; /* Indigo for footer links */
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #dc0e29; /* Tomato color for hover effect */
+}
+
+footer p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .search-box {
+    margin-left: auto;
+    justify-content: flex-end;
+  }
+
+  nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .logo-img {
+    width: 100px;
+  }
+
+  .search-box input {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .search-box input {
+    width: 90%;
+    max-width: 250px;
+  }
+}
+/* Button Styles */
+.add-to-cart-btn {
+  background-color: #1F3A58; /* Midnight Blue */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #7c1b41; /* Darker Blue on hover */
+  transform: scale(1.05); /* Slight scaling effect on hover */
+}
+
+.add-to-cart-btn:focus {
+  outline: none; /* Removes outline on focus */
+}
+
+/* Login Container */
+.login-container {
+  max-width: 400px;
+  margin: 80px auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Title */
+.login-title {
+  text-align: center;
+  color: #1F3A58;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 20px;
+}
+
+/* Form */
+.login-form label {
+  display: block;
+  margin-bottom: 5px;
+  color: #1F3A58;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #1F3A58;
+  border-radius: 5px;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: #1F3A58;
+}
+
+/* Button */
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background-color:#1F3A58;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #7c1b41; /* Darker Blue on hover */
+  transform: scale(1.05); 
+}
+
+/* Text Center */
+.text-center {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.mt-3 {
+  margin-top: 20px;
+}
+/* Base Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* Title */
+.signup-title {
+  text-align: center;
+  color: #1F3A58;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 20px;
+}
+
+/* Container */
+.signup-container {
+  max-width: 450px;
+  margin: 40px auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+/* Form Labels */
+.signup-form label {
+  display: block;
+  margin-bottom: 6px;
+  color: #1F3A58;
+  font-weight: 600;
+}
+
+/* Input Fields */
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #1F3A58;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.signup-form input:focus {
+  outline: none;
+  border-color: #1F3A58;
+}
+
+/* Submit Button */
+.signup-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #1F3A58;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.signup-button:hover {
+background-color: #7c1b41; /* Darker Blue on hover */
+  transform: scale(1.05); 
+}
+
+/* Text Center */
+.text-center {
+  text-align: center;
+}
+
+.mt-3 {
+  margin-top: 20px;
+}
+/* Base Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  background-color: #EDE9FE;
+  padding: 15px 0;
+}
+
+.logo-img {
+  height: 50px;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 0;
+  margin: 10px 0 0 0;
+}
+
+.nav a {
+  color: #5b21b6;
+  font-weight: 600;
+}
+
+.nav a.active {
+  text-decoration: underline;
+}
+
+/* About Section */
+.about-section {
+  padding: 60px 0;
+  background-color: #fff;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.section-title {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: #1F3A58;
+  margin-bottom: 20px;
+}
+
+.section-description {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 20px auto;
+  line-height: 1.8;
+}
+
+/* Mission, Vision, Values Section */
+.mvv-section {
+  padding: 60px 0;
+  background-color: #f3f4f6;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.mvv-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.mvv-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.mvv-card h3 {
+  color: #1F3A58;
+  margin-bottom: 10px;
+}
+
+/* Map Section */
+.map-section {
+  padding: 60px 0;
+  background-color: #fff;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.map-container {
+  width: 100%;
+  height: 450px;
+  margin-top: 20px;
+}
+
+/* Footer */
+.footer {
+  background-color: #EDE9FE;
+  text-align: center;
+  padding: 20px 0;
+  color: #5b21b6;
+}
+
+.footer a {
+  color: #5b21b6;
+  margin: 0 5px;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.social-links {
+  margin-top: 10px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mvv-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+main {
+  max-width: 960px;
+  margin: 48px auto;
+  padding: 0 16px;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1F3A58;
+  margin-bottom: 24px;
+}
+
+form {
+  background-color: #FFFFFF;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1F3A58;
+  display: block;
+  margin-bottom: 8px;
+}
+
+select, input[type="text"], input[type="month"] {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid #1F3A58;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.radio-group {
+  margin-top: 16px;
+}
+
+.radio-option {
+  margin-top: 16px;
+}
+
+.radio-option label {
+  display: inline;
+  font-size: 16px;
+  color: #1F3A58;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #1F3A58;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #7c1b41; /* Darker Blue on hover */
+  transform: scale(1.05); 
+}
