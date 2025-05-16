@@ -41,19 +41,16 @@ mintra/
 │   ├── jacket.jpeg
 │   └── formal-shirt.webp
 └── README.md
+
 🛠️ Installation & Setup
 Clone the repository:
-
 bash
-Copy
-Edit
-git clone https://github.com/yourusername/mintra.git
+https://github.com/Reshmamohammad26/mintra_.git
+
 Navigate to the project directory:
-
 bash
-Copy
-Edit
 cd mintra
+
 Open index.html in your preferred web browser to view the homepage.
 
 
